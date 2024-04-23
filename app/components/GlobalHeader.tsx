@@ -1,13 +1,14 @@
-import React from 'react';
-
-
+"use client"
 // styles
-import { HeaderContainer } from '../styles/GlobalHeaderStyles';
-
+import { HeaderContainer } from "@/app/styles/global/GlobalHeaderStyles";
 const GlobalHeader = () => {
   return (
     <HeaderContainer>
-      <div>Talk to me◦</div>
+      <div className='mainTitle'>Talk to me◦</div>
+      <div className='buttonContainer'>
+        <button className='myChat'>myChat</button>
+        <button className='logOut'>로그아웃</button>
+      </div>
     </HeaderContainer>
   );
 };
