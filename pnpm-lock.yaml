@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      axios:
-        specifier: ^1.6.8
-        version: 1.6.8
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.57.0)
@@ -45,6 +42,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.2.25
+      axios:
+        specifier: ^1.6.8
+        version: 1.6.8
       eslint:
         specifier: ^8
         version: 8.57.0

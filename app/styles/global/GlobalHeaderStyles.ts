@@ -9,12 +9,11 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   align-items: center;
 
-
   .mainTitle {
     margin: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;
-    &:hover{
+    &:hover {
       transition: 0.3s transform;
       transform: scale(1.1);
     }
@@ -27,7 +26,7 @@ export const HeaderContainer = styled.div`
     color: ${theme.mainColor};
     font-size: 1.1rem;
     background-color: white;
-    &:hover{
+    &:hover {
       color: white;
       background-color: ${theme.mainColor};
       transition: 0.3s transform;
@@ -35,26 +34,26 @@ export const HeaderContainer = styled.div`
     }
   }
 
-  .buttonContainer{
+  .buttonContainer {
     width: 17vw;
     display: flex;
     justify-content: space-between;
     margin-right: 0.5rem;
   }
 
-  .logOut{
+  .logOut {
     width: 8vw;
     border: 1px solid ${theme.mainColor};
     color: ${theme.mainColor};
     background-color: white;
     border-radius: 0.5rem;
     font-size: 1.1rem;
-    
-    &:hover{
+
+    &:hover {
       color: white;
       background-color: ${theme.mainColor};
       transition: 0.3s transform;
       transform: scale(1.1);
     }
   }
-`
+`;
