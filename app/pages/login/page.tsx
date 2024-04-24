@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import Image from "next/image";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // styles
 import { LoginContainer } from "@/app/styles/Login/LoginStyles";
+import { InputStyle } from "@/app/styles/Global/CommonStyles";
 
 // img
 import ShowPwd from "@/app/assets/login/showPassword.png";
@@ -61,7 +62,7 @@ const page = () => {
       <span className="projectTitle">Talk to me◦</span>
 
       <main className="inputContainer">
-        <div className="emailInput">
+        <InputStyle style={{ marginBottom: "0.5rem" }}>
           <input
             className="input"
             type="email"
@@ -70,9 +71,9 @@ const page = () => {
             required
             onChange={(e) => inputData("email", e.target.value)}
           />
-        </div>
+        </InputStyle>
 
-        <div className="pwdInput">
+        <InputStyle style={{ marginBottom: "0.5rem" }}>
           <input
             className="input"
             type={changePasswordMode ? "text" : "password"}
@@ -86,7 +87,7 @@ const page = () => {
             alt="비밀번호 보이기"
             onClick={handlePWD}
           />
-        </div>
+        </InputStyle>
 
         {/* 로그인 error 시에 */}
         <div className="errorMessage">

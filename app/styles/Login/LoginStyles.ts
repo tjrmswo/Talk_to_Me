@@ -24,49 +24,6 @@ export const LoginContainer = styled.div`
     flex-direction: column;
   }
 
-  .emailInput {
-    display: flex;
-    align-items: center;
-    width: 28vw;
-    height: 7vh;
-    border: 2px solid #c1c1c1;
-    border-radius: 0.5rem 0.5rem 0 0;
-    padding-left: 0.5rem;
-    font-size: 1.1rem;
-    outline: none;
-    &:hover {
-      border-color: ${theme.mainColorDeepRed};
-    }
-    &:focus {
-      border-color: ${theme.mainColorDeepRed};
-    }
-  }
-  .pwdInput {
-    display: flex;
-    align-items: center;
-    width: 28vw;
-    height: 7vh;
-    border: 2px solid #c1c1c1;
-    border-radius: 0 0 0.5rem 0.5rem;
-    padding-left: 0.5rem;
-    font-size: 1.1rem;
-    outline: none;
-    &:hover {
-      border-color: ${theme.mainColorDeepRed};
-    }
-    &:focus {
-      border-color: ${theme.mainColorDeepRed};
-    }
-  }
-
-  .input {
-    width: 26vw;
-    font-size: 1.1rem;
-
-    border: none;
-    outline: none;
-  }
-
   .errorMessage {
     font-size: 0.9rem;
     color: ${theme.wrongMentColor};
