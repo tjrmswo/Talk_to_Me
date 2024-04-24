@@ -1,16 +1,19 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "./ColorStyles";
+import { showContainer, showContainer2 } from "../keyframes";
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div<{ animations: boolean }>`
   width: 100%;
-  height: 60px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  box-shadow: 0 2px 5px 0 gray;
 
   .mainTitle {
     margin: 0.5rem;
+    margin-left: 1.5rem;
     font-size: 1.5rem;
     font-weight: bold;
     &:hover {
@@ -18,13 +21,23 @@ export const HeaderContainer = styled.div`
       transform: scale(1.1);
     }
   }
+  .guideMessages {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .buttonContainer {
+    width: 15vw;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.5rem;
+  }
 
   .myChat {
-    width: 8vw;
+    width: 7vw;
     border: 1px solid ${theme.mainColor};
     border-radius: 0.5rem;
     color: ${theme.mainColor};
-    font-size: 1.1rem;
     background-color: white;
     &:hover {
       color: white;
@@ -34,21 +47,12 @@ export const HeaderContainer = styled.div`
     }
   }
 
-  .buttonContainer {
-    width: 17vw;
-    display: flex;
-    justify-content: space-between;
-    margin-right: 0.5rem;
-  }
-
   .logOut {
-    width: 8vw;
+    width: 7vw;
     border: 1px solid ${theme.mainColor};
     color: ${theme.mainColor};
     background-color: white;
     border-radius: 0.5rem;
-    font-size: 1.1rem;
-
     &:hover {
       color: white;
       background-color: ${theme.mainColor};
