@@ -38,8 +38,11 @@ import useGetMessages, {
 import useHandleInterest, {
   HandleInterestType,
 } from "@/app/hooks/signup/useHandleInterest";
+import { db } from "@/app/mocks/db";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const router = useRouter();
   // 비밀번호 보이기
   const [changePasswordMode, setChangePasswordMode] = useState<boolean>(false);
   // 누락된 부분 확인
@@ -59,7 +62,7 @@ const page = () => {
   });
   const { email, nickname, password, passwordChecked } = signupData;
   // 관심사
-  const [interests, setInterests] = useRecoilState(userInterests);
+  const [interests, setInterests] = useRecoilState<string[]>(userInterests);
 
   // 비밀번호 보이게 하는 상태
   const showment = password === passwordChecked && password !== "";
@@ -120,26 +123,38 @@ const page = () => {
       nickname,
       password,
       passwordChecked,
-      interests.interests,
-    ].some((field) => {
-      console.log(field);
-    });
+      interests,
+    ].some((field) => field === "");
     setIsMissingFields(missingFields);
   };
 
   // 회원 가입
-  const handleSignup = () => {
+  const handleSignup = async () => {
     checkMissingFields();
     // 누락된 부분이 없을 경우에만 회원가입 로직 실행
     if (!isMissingFields) {
       // 회원가입 로직
-      console.log("회원가입 성공!");
+      try {
+        const response = await axios.post("/v1/api/login", {
+          email,
+          nickname,
+          password,
+          passwordChecked,
+          interests,
+        });
+        console.log(response);
+        router.push("/pages/login");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   useEffect(() => {
     console.log("signupData: ", signupData);
     console.log("interests: ", interests);
-    console.log("messages: ", messages);
+    // console.log("messages: ", messages);
+    const dbuser = db.user.getAll();
+    console.log(dbuser);
   }, [signupData, interests, messages]);
 
   return (

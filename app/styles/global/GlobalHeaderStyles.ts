@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { theme } from "./ColorStyles";
 import { showContainer, showContainer2 } from "../keyframes";
 
-export const HeaderContainer = styled.div<{ animations: boolean }>`
+export const HeaderContainer = styled.div<{ animations: string | undefined }>`
   width: 100%;
   height: 50px;
   display: flex;
@@ -10,6 +10,7 @@ export const HeaderContainer = styled.div<{ animations: boolean }>`
   flex-direction: row;
   align-items: center;
   box-shadow: 0 2px 5px 0 gray;
+  z-index: 1;
 
   .mainTitle {
     margin: 0.5rem;

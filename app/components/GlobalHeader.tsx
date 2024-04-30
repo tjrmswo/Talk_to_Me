@@ -5,13 +5,12 @@ import { HeaderContainer } from "@/app/styles/Global/GlobalHeaderStyles";
 // libraries
 import { useRecoilValue } from "recoil";
 import { guideMessage, messageAnimationState } from "@/app/atom/state";
-import { showContainer, showContainer2 } from "../styles/keyframes";
-import { css } from "styled-components";
+
 const GlobalHeader = () => {
   const message = useRecoilValue(guideMessage);
   const animations = useRecoilValue(messageAnimationState);
   return (
-    <HeaderContainer animations={animations}>
+    <HeaderContainer animations={animations ? String(animations) : undefined}>
       <div className="mainTitle">Talk to me◦</div>
       <div className="guideMessages">{message}</div>
       <div className="buttonContainer">

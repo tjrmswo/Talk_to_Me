@@ -1,9 +1,9 @@
 import { atom } from "recoil";
 import { UserInterests } from "../types/aboutSignup";
 
-export const userInterests = atom<UserInterests>({
+export const userInterests = atom<string[]>({
   key: "user_interests",
-  default: { interests: [] },
+  default: [],
 });
 
 export const guideMessage = atom<string>({
