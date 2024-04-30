@@ -28,6 +28,7 @@ export const LoginContainer = styled.div`
     font-size: 0.9rem;
     color: ${theme.wrongMentColor};
     margin-top: 0.5rem;
+    animation: 0.5s ${showContainer};
   }
 
   .loginButton {

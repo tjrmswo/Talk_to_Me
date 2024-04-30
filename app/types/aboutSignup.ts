@@ -8,3 +8,10 @@ export interface SignupUserData {
 export interface UserInterests {
   interests: string[];
 }
+
+export interface LoginType {
+  email: string;
+  nickname: string;
+  password: string;
+  interests: string[];
+}

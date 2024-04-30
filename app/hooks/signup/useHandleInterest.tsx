@@ -2,9 +2,9 @@ import { UserInterests } from "@/app/types/aboutSignup";
 import { SetStateAction } from "react";
 
 export interface HandleInterestType {
-  interests: UserInterests;
+  interests: string[];
   interest: string;
-  setInterests: React.Dispatch<SetStateAction<UserInterests>>;
+  setInterests: React.Dispatch<SetStateAction<string[]>>;
 }
 
 const useHandleInterest = ({
@@ -13,17 +13,11 @@ const useHandleInterest = ({
   setInterests,
 }: HandleInterestType) => {
   function handleInterest() {
-    if (!interests.interests.includes(interest)) {
-      setInterests((prev) => ({
-        interests: [...prev.interests, interest],
-      }));
-    } else if (interests.interests.includes(interest)) {
-      const removeSelectedData = interests.interests.filter(
-        (data) => data !== interest
-      );
-      setInterests({
-        interests: removeSelectedData,
-      });
+    if (!interests.includes(interest)) {
+      setInterests((prev) => [...prev, interest]);
+    } else if (interests.includes(interest)) {
+      const removeSelectedData = interests.filter((data) => data !== interest);
+      setInterests(removeSelectedData);
     }
   }
   return handleInterest;

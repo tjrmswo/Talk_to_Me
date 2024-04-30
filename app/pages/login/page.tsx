@@ -18,6 +18,8 @@ import Script from "next/script";
 
 // types
 import { LoginUserData } from "@/app/types/aboutLogin";
+import { db } from "@/app/mocks/db";
+import { DATABASE_INSTANCE } from "@mswjs/data/lib/glossary";
 
 const page = () => {
   const router = useRouter();
@@ -28,6 +30,10 @@ const page = () => {
     password: "",
   });
 
+  const [isFailed, setIsFailed] = useState<boolean>(false);
+
+  const { email, password } = loginData;
+
   // 비밀번호 상태 변경
   const handlePWD = () => {
     setChangePasswordMode(!changePasswordMode);
@@ -36,11 +42,6 @@ const page = () => {
   // 회원가입 페이지 이동
   const goSignup = () => {
     router.push("/pages/signup");
-  };
-
-  // 홈페이지 이동
-  const goHome = () => {
-    router.push("/");
   };
 
   // 로그인 데이터
@@ -54,8 +55,27 @@ const page = () => {
   // 추 후 backend 구축 후에 카카오 소셜 로그인 작업 예정
   const kakaoLogin = () => {};
 
+  // login 로직
+  const logIn = () => {
+    const checkUser = db.user
+      .getAll()
+      .filter(
+        (userData) => userData.email === email && userData.password === password
+      );
+    console.log(checkUser);
+    if (checkUser.length > 0) {
+      // 홈페이지 이동
+      router.push("/");
+    } else {
+      console.log("Login Failed!!");
+      setIsFailed(true);
+    }
+  };
+
   useEffect(() => {
     console.log("loginData: ", loginData);
+    const getAllUser = db.user.getAll();
+    console.log("getAllUser: ", getAllUser);
   }, [loginData]);
   return (
     <LoginContainer>
@@ -90,13 +110,14 @@ const page = () => {
         </InputStyle>
 
         {/* 로그인 error 시에 */}
-        <div className="errorMessage">
-          {" "}
-          이메일 혹은 비밀번호를 확인해주세요 ❌{" "}
-        </div>
+        {isFailed && (
+          <div className="errorMessage">
+            이메일 혹은 비밀번호를 확인해주세요 ❌
+          </div>
+        )}
       </main>
 
-      <button className="loginButton" onClick={goHome}>
+      <button className="loginButton" onClick={logIn}>
         로그인
       </button>
 
