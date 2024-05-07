@@ -6,3 +6,8 @@ export interface userDataDTO {
   interests: string[];
   profile: string;
 }
+
+export interface userSearchDTO {
+  nickname: string;
+  interests: string[];
+}

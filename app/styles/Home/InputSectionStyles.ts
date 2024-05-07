@@ -2,17 +2,16 @@ import styled from "styled-components";
 import { theme } from "../Global/ColorStyles";
 
 export const InputContainer = styled.div`
-  width: 20vw;
-  height: 8px;
+  width: 40vw;
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
   justify-content: center;
   font-size: 0.8rem;
   padding: 1rem;
-  margin-left: 6rem;
   margin-bottom: 1rem;
   margin-top: 2rem;
+  background-color: #333333;
+  border-radius: 1rem;
 
   .row {
     display: flex;
@@ -20,26 +19,30 @@ export const InputContainer = styled.div`
     align-items: center;
   }
   .input {
-    width: 18vw;
-    height: 30px;
-    border: 1px solid black;
+    width: 40vw;
+    height: 50px;
+    color: white;
     outline: none;
-    border-radius: 0.4rem;
-    margin-right: 0.3rem;
+    border: none;
+    font-size: 1.2rem;
     padding-left: 0.3rem;
-    &:focus {
+    margin-left: 0.5rem;
+    background-color: #333333;
+    &::placeholder {
+      color: white;
+    }
+    /* &:focus {
       transition: 0.5s border-radius ease-in-out;
       border: 1px solid ${theme.mainColorOrange};
       border-radius: 0.8rem;
-    }
-
-    .selectInterest {
-      width: 5vw;
-      margin-left: 1rem;
-      &:hover {
-        transition: 0.5s border-radius ease-in-out;
-        border: 1px solid ${theme.mainColorOrange};
-      }
+    } */
+  }
+  .selectInterest {
+    width: 5vw;
+    margin-left: 1rem;
+    &:hover {
+      transition: 0.5s border-radius ease-in-out;
+      border: 1px solid ${theme.mainColorOrange};
     }
   }
 `;

@@ -4,28 +4,69 @@ import Image from "next/image";
 // styles
 import { InputContainer } from "@/app/styles/Home/InputSectionStyles";
 
-// img
-import Search from "@/app/assets/home/searchIcon.png";
+// constants
 import { Interests } from "@/app/constants/signup/signupConstants";
 
-const InputSection = () => {
+// types
+import { userDataDTO, userSearchDTO } from "@/app/types/aboutHome";
+import { SetStateAction } from "react";
+
+// img
+import Search from "@/app/assets/header/search.png";
+
+interface inputSectionType {
+  userData: userDataDTO[];
+  setUserData: React.Dispatch<SetStateAction<userDataDTO[]>>;
+  searchData: userSearchDTO;
+  setSearchData: React.Dispatch<SetStateAction<userSearchDTO>>;
+}
+
+const InputSection: React.FC<inputSectionType> = ({
+  userData,
+  setUserData,
+  searchData,
+  setSearchData,
+}) => {
+  // input 검색
+  const searchUser = (user: string) => {
+    setSearchData((prev) => ({
+      ...prev,
+      nickname: user,
+    }));
+    const search = userData.filter((data) => data.nickname.includes(user));
+    if (search.length > 0) {
+      setUserData(search);
+    }
+  };
+
+  // // select 검색
+  // const selectSearchUser = (searchInterest: string) => {
+  //   console.log(searchInterest);
+  //   if (!searchData.interests.includes(searchInterest)) {
+  //     setSearchData((prev) => ({
+  //       ...prev,
+  //       interests: [...prev.interests, searchInterest],
+  //     }));
+  //   } else {
+  //     const removeInterest = searchData.interests.filter(
+  //       (interest) => interest !== searchInterest
+  //     );
+  //     setSearchData((prev) => ({
+  //       ...prev,
+  //       interests: removeInterest,
+  //     }));
+  //   }
+  // };
+
   return (
     <InputContainer>
       <div className="row">
-        <input className="input" placeholder="찾고 싶은 유저를 검색하세요" />
-        <Image
-          src={Search}
-          alt="검색 아이콘"
-          width={20}
-          height={20}
-          className="img"
+        <Image src={Search} alt="검색" width={20} height={20} />
+        <input
+          className="input"
+          placeholder="찾고 싶은 유저를 검색하세요"
+          onChange={(e) => searchUser(e.target.value)}
         />
-
-        <select className="selectInterest">
-          {Interests.map((interest, i) => (
-            <option key={i}>{interest}</option>
-          ))}
-        </select>
       </div>
     </InputContainer>
   );

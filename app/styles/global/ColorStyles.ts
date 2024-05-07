@@ -10,4 +10,5 @@ export const theme = {
   correctMentColor: "#00FF0A",
   wrongMentColor: "#FE0000",
   mainColorGray: "#c1c1c1",
+  mainColorLightGray: "#efefef",
 };
