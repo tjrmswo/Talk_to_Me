@@ -17,6 +17,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["헬스", "배드민턴", "독서", "배드민턴", "배드민턴"],
+  profile: "bearded_asian_man",
 });
 
 db.user.create({
@@ -25,6 +26,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["독서"],
+  profile: "black_woman",
 });
 
 db.user.create({
@@ -33,6 +35,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["헬스", "독서"],
+  profile: "casual_man",
 });
 db.user.create({
   email: "d@d.com",
@@ -40,6 +43,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["배드민턴"],
+  profile: "hoodzipup_man",
 });
 
 db.user.create({
@@ -48,6 +52,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["배드민턴", "독서"],
+  profile: "ponytail_woman",
 });
 
 db.user.create({
@@ -56,6 +61,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["헬스"],
+  profile: "shirts_man",
 });
 
 db.user.create({
@@ -64,6 +70,7 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["여행"],
+  profile: "shortcut_woman",
 });
 
 db.user.create({
@@ -72,4 +79,5 @@ db.user.create({
   password: "qwer12345",
   passwordChecked: "qwer12345",
   interests: ["여행", "배드민턴", "독서"],
+  profile: "white_man",
 });

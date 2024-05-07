@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // styles
 import { HomeContainer } from "@/app/styles/Home/HomeStyles";
@@ -10,51 +11,104 @@ import GlobalHeader from "./components/GlobalHeader";
 import InputSection from "./components/Home/InputSection";
 import LoadingPage from "./components/LoadingPage";
 import ErrorPage from "./components/ErrorPage";
-import UserSection from "./components/Home/UserSection";
+import PromotionSection from "./components/Home/PromotionSection";
 
 // types
-import { userDataDTO } from "./types/aboutHome";
+import { userDataDTO, userSearchDTO } from "./types/aboutHome";
 
 // libraries
 import { useQuery } from "react-query";
 import axios from "axios";
 
-const Home = () => {
-  const [userData, setUserData] = useState<userDataDTO[]>([]);
+// constants
+import { Interests } from "./constants/signup/signupConstants";
+import CategoryContainer from "./styles/Home/CategoryContainer";
+import SearchResultContainer from "./styles/Home/SearchResultContainer";
 
+const Home = () => {
+  // 전체 유저 데이터
+  const [userData, setUserData] = useState<userDataDTO[]>([]);
+  // 검색한 데이터
+  const [searchData, setSearchData] = useState<userSearchDTO>({
+    nickname: "",
+    interests: [],
+  });
+  const { nickname, interests } = searchData;
+
+  // input Section boolean
+  const [openInputSection, setOpenInputSection] = useState<boolean>(false);
+
+  // 선택된 유저 데이터
+  const [selectUserData, setSelectUserData] = useState<userDataDTO>({
+    email: "",
+    nickname: "",
+    password: "",
+    passwordChecked: "",
+    interests: [],
+    profile: "",
+  });
+
+  // 전체 유저 데이터 가져오기
   const getAllUserData = useQuery({
     queryKey: ["userData"],
     queryFn: async () => {
       const response = await axios.get("/v1/api/user");
       const data = response.data;
       console.log(response);
-
       setUserData(data);
 
       return data;
     },
   });
 
+  const getUserData = (data: userDataDTO) => {
+    setSelectUserData(data);
+  };
+
+  useEffect(() => {
+    if (nickname === "") {
+      getAllUserData.refetch();
+    }
+  }, [searchData]);
+
+  useEffect(() => {
+    console.log("interests: ", interests);
+    console.log("selectUserData: ", selectUserData);
+  }, [interests, selectUserData]);
+
   if (getAllUserData.isLoading) return <LoadingPage />;
   if (getAllUserData.isError) return <ErrorPage />;
 
   return (
-    <HomeContainer>
-      <GlobalHeader />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          zIndex: 0,
-          backgroundColor: "#F9F8F8",
-          width: "60vw",
-          height: "90vh",
-        }}
-      >
-        <InputSection />
-        <UserSection userData={userData} />
-      </div>
+    <HomeContainer openinputsection={String(openInputSection)}>
+      <GlobalHeader
+        openInputSection={openInputSection}
+        setOpenInputSection={setOpenInputSection}
+      />
+      {openInputSection === true ? (
+        <div className="ContentContainer2">
+          <InputSection
+            userData={userData}
+            setUserData={setUserData}
+            searchData={searchData}
+            setSearchData={setSearchData}
+          />
+          <CategoryContainer Interests={Interests} />
+          {nickname.length > 0 && (
+            <h2 className="searchResultMent">
+              {nickname}에 대한 검색 결과입니다.
+            </h2>
+          )}
+          <SearchResultContainer
+            userData={userData}
+            getUserData={getUserData}
+          />
+        </div>
+      ) : (
+        <div className="ContentContainer">
+          <PromotionSection userData={userData} searchData={searchData} />
+        </div>
+      )}
     </HomeContainer>
   );
 };

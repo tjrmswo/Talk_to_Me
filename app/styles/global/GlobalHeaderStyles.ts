@@ -1,20 +1,22 @@
 import styled, { css } from "styled-components";
-import { theme } from "./ColorStyles";
-import { showContainer, showContainer2 } from "../keyframes";
+import { hideHeaderIcons, showContainer, showOtherImg } from "../keyframes";
 
-export const HeaderContainer = styled.div<{ animations: string | undefined }>`
+export const HeaderContainer = styled.div<{
+  animations: string | undefined;
+  openinputsection: string;
+}>`
   width: 100%;
-  height: 50px;
+  height: 70px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
   align-items: center;
-  box-shadow: 0 2px 5px 0 gray;
+  box-shadow: 0 1px 5px 2px gray;
   z-index: 1;
 
   .mainTitle {
     margin: 0.5rem;
-    margin-left: 1.5rem;
+    margin-left: 3rem;
     font-size: 1.5rem;
     font-weight: bold;
     &:hover {
@@ -30,35 +32,41 @@ export const HeaderContainer = styled.div<{ animations: string | undefined }>`
   .buttonContainer {
     width: 15vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 0.5rem;
+    /* animation: ${(props) =>
+      props.openinputsection === "true"
+        ? css`1s ${hideHeaderIcons}`
+        : css`1s ${showContainer}`};
+    animation-fill-mode: forwards; */
+  }
+  .buttonContainer2 {
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 0.5rem;
   }
 
-  .myChat {
-    width: 7vw;
-    border: 1px solid ${theme.mainColor};
-    border-radius: 0.5rem;
-    color: ${theme.mainColor};
-    background-color: white;
+  .img {
     &:hover {
-      color: white;
-      background-color: ${theme.mainColor};
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      background-color: #efefef;
       transition: 0.3s transform;
-      transform: scale(1.1);
+      transform: scale(1.3);
     }
   }
 
-  .logOut {
-    width: 7vw;
-    border: 1px solid ${theme.mainColor};
-    color: ${theme.mainColor};
-    background-color: white;
-    border-radius: 0.5rem;
+  .otherImg {
     &:hover {
-      color: white;
-      background-color: ${theme.mainColor};
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      background-color: #efefef;
       transition: 0.3s transform;
-      transform: scale(1.1);
+      transform: scale(1.3);
     }
+    /* animation: 1s ${showOtherImg}; */
   }
 `;
