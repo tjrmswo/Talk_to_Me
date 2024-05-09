@@ -1,10 +1,18 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Image from "next/image";
+
+// libraries
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // types
 import { userDataDTO, userSearchDTO } from "@/app/types/aboutHome";
 
 // styles
-import { PromtionSectionContainer } from "@/app/styles/Home/UserSectionStyles";
+import { PromtionSectionContainer } from "@/app/styles/Home/PromotionSectionStyles";
+import { ments } from "@/app/constants/home/PromotionMents";
+import { useRouter } from "next/navigation";
 
 // img
 
@@ -13,15 +21,43 @@ interface userSectionType {
   searchData: userSearchDTO;
 }
 
+const settings = {
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 1500,
+  autoplaySpeed: 3500,
+  cssEase: "linear",
+};
+
 const promotionSection: React.FC<userSectionType> = ({ userData }) => {
+  const router = useRouter();
+
+  const goLogin = () => {
+    router.push("/pages/login");
+  };
   return (
     <PromtionSectionContainer>
-      <h1 className="title">Talk_to_Me∘</h1>
-      <h3>인터넷 친구를 만들고 싶다면</h3>
-      <h3>바로 채팅을 시작해보세요!</h3>
-      <h3>공통 관심사를 가진 사람과</h3>
-      <h3>친구를 맺어 대화할 수 있습니다💬</h3>
-      {/* <button>바로 시작하기</button> */}
+      <h2 className="title">Talk_to_Me∘</h2>
+      {ments.slice(0, 3).map((ment, i) => (
+        <h3
+          style={{
+            fontSize: "1.2rem",
+            fontFamily: "fantasy",
+            marginLeft: "1rem",
+            marginRight: "1rem",
+            whiteSpace: "pre-line",
+            textAlign: "center",
+          }}
+          key={i}
+        >
+          {ment}
+        </h3>
+      ))}
+      <button className="startButton" onClick={goLogin}>
+        무료로 시작하기 →
+      </button>
     </PromtionSectionContainer>
   );
 };

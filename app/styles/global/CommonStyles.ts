@@ -22,8 +22,20 @@ export const InputStyle = styled.div`
 
   .input {
     width: 26vw;
-    font-size: 0.8rem;
     border: none;
     outline: none;
+  }
+`;
+
+export const CommonButton = styled.button`
+  border: 2px solid ${theme.mainColor};
+  border-radius: 0.5rem;
+  color: ${theme.mainColor};
+  background-color: white;
+  &:hover {
+    color: white;
+    background-color: ${theme.mainColor};
+    transition: 0.3s transform;
+    transform: scalex(1.05);
   }
 `;

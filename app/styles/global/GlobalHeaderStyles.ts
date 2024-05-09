@@ -3,12 +3,12 @@ import { hideHeaderIcons, showContainer, showOtherImg } from "../keyframes";
 
 export const HeaderContainer = styled.div<{
   animations: string | undefined;
-  openinputsection: string;
+  inputSection: string;
 }>`
   width: 100%;
   height: 70px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
   box-shadow: 0 1px 5px 2px gray;
@@ -25,6 +25,8 @@ export const HeaderContainer = styled.div<{
     }
   }
   .guideMessages {
+    text-align: center;
+    width: 24vw;
     font-size: 1.2rem;
     font-weight: 700;
   }
@@ -35,11 +37,6 @@ export const HeaderContainer = styled.div<{
     justify-content: space-around;
     align-items: center;
     margin-right: 0.5rem;
-    /* animation: ${(props) =>
-      props.openinputsection === "true"
-        ? css`1s ${hideHeaderIcons}`
-        : css`1s ${showContainer}`};
-    animation-fill-mode: forwards; */
   }
   .buttonContainer2 {
     width: 15vw;
