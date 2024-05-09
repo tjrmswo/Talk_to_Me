@@ -1,14 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { SetStateAction, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 // styles
 import { HeaderContainer } from "@/app/styles/Global/GlobalHeaderStyles";
 
 // libraries
-import { useRecoilValue } from "recoil";
-import { guideMessage, messageAnimationState } from "@/app/atom/state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  guideMessage,
+  handleInputSection,
+  messageAnimationState,
+} from "@/app/atom/state";
 
 //img
 import Serach from "@/app/assets/header/searchIcon.png";
@@ -16,35 +21,39 @@ import Chatting from "@/app/assets/header/chat.png";
 import LogOut from "@/app/assets/header/logout.png";
 import Close from "@/app/assets/header/Close_round.png";
 
-interface GlobalHeaderType {
-  openInputSection: boolean;
-  setOpenInputSection: React.Dispatch<SetStateAction<boolean>>;
-}
-const GlobalHeader: React.FC<GlobalHeaderType> = ({
-  openInputSection,
-  setOpenInputSection,
-}) => {
+const GlobalHeader = () => {
+  const router = useRouter();
   const message = useRecoilValue(guideMessage);
   const animations = useRecoilValue(messageAnimationState);
+  const [inputSection, setInputSection] = useRecoilState(handleInputSection);
 
   const showInput = () => {
-    setOpenInputSection(true);
+    setInputSection(true);
   };
 
   const hideInput = () => {
-    setOpenInputSection(false);
+    setInputSection(false);
+  };
+
+  const goHome = () => {
+    router.push("/");
   };
   useEffect(() => {
-    console.log("openInputSection: ", openInputSection);
-  }, [openInputSection]);
+    console.log("inputSection: ", inputSection);
+  }, [inputSection]);
   return (
     <HeaderContainer
-      openinputsection={String(openInputSection)}
+      inputSection={String(inputSection)}
       animations={animations ? String(animations) : undefined}
     >
-      <div className="mainTitle">Talk to me◦</div>
+      <div className="mainTitle" onClick={goHome}>
+        Talk to me◦
+      </div>
+      {/* <div>
+        <span>친구</span> <span>내 정보</span>
+      </div> */}
       <div className="guideMessages">{message}</div>
-      {openInputSection === true ? (
+      {inputSection === true ? (
         <div className="buttonContainer2">
           <Image
             className="otherImg"

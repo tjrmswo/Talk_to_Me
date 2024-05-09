@@ -29,7 +29,6 @@ export const SignupContainer = styled.div<{ showment: string }>`
 
   .input {
     width: 26vw;
-    font-size: 1.1rem;
     border: none;
     outline: none;
   }

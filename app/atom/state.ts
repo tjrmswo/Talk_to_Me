@@ -15,3 +15,8 @@ export const messageAnimationState = atom<boolean>({
   key: "get_animation_state",
   default: false,
 });
+
+export const handleInputSection = atom<boolean>({
+  key: "handle_input_section",
+  default: false,
+});

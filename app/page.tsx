@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 // styles
 import { HomeContainer } from "@/app/styles/Home/HomeStyles";
+import CategoryContainer from "./styles/Home/CategoryContainer";
+import SearchResultContainer from "./styles/Home/SearchResultContainer";
 
 // components
 import GlobalHeader from "./components/GlobalHeader";
@@ -19,11 +21,11 @@ import { userDataDTO, userSearchDTO } from "./types/aboutHome";
 // libraries
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { handleInputSection } from "./atom/state";
 
 // constants
 import { Interests } from "./constants/signup/signupConstants";
-import CategoryContainer from "./styles/Home/CategoryContainer";
-import SearchResultContainer from "./styles/Home/SearchResultContainer";
 
 const Home = () => {
   // 전체 유저 데이터
@@ -36,7 +38,8 @@ const Home = () => {
   const { nickname, interests } = searchData;
 
   // input Section boolean
-  const [openInputSection, setOpenInputSection] = useState<boolean>(false);
+  const [openInputSection, setOpenInputSection] =
+    useRecoilState<boolean>(handleInputSection);
 
   // 선택된 유저 데이터
   const [selectUserData, setSelectUserData] = useState<userDataDTO>({
@@ -81,10 +84,7 @@ const Home = () => {
 
   return (
     <HomeContainer openinputsection={String(openInputSection)}>
-      <GlobalHeader
-        openInputSection={openInputSection}
-        setOpenInputSection={setOpenInputSection}
-      />
+      <GlobalHeader />
       {openInputSection === true ? (
         <div className="ContentContainer2">
           <InputSection

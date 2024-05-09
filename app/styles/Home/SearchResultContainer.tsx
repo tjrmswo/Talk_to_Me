@@ -1,6 +1,9 @@
-import { userDataDTO } from "@/app/types/aboutHome";
 import Image from "next/image";
+// types
+import { userDataDTO } from "@/app/types/aboutHome";
 
+//img
+import AddFriends from "@/app/assets/home/Group_add_fill.png";
 interface SearchResultContainerType {
   userData: userDataDTO[];
   getUserData: (data: userDataDTO) => void;
@@ -20,6 +23,13 @@ const SearchResultContainer: React.FC<SearchResultContainerType> = ({
             key={i}
             onClick={() => getUserData(user)}
           >
+            <div
+              style={{
+                textAlign: "end",
+              }}
+            >
+              <Image src={AddFriends} alt="친구 추가" />
+            </div>
             <div className="imgContainer">
               <Image src={img} alt="아바타 사진" width={100} height={100} />
             </div>
