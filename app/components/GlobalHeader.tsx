@@ -38,12 +38,10 @@ const GlobalHeader = () => {
   const goHome = () => {
     router.push("/");
   };
-  useEffect(() => {
-    console.log("inputSection: ", inputSection);
-  }, [inputSection]);
+
   return (
     <HeaderContainer
-      inputSection={String(inputSection)}
+      inputsection={String(inputSection)}
       animations={animations ? String(animations) : undefined}
     >
       <div className="mainTitle" onClick={goHome}>

@@ -3,7 +3,7 @@ import { hideHeaderIcons, showContainer, showOtherImg } from "../keyframes";
 
 export const HeaderContainer = styled.div<{
   animations: string | undefined;
-  inputSection: string;
+  inputsection: string;
 }>`
   width: 100%;
   height: 70px;

@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // styles
 import { LoginContainer } from "@/app/styles/Login/LoginStyles";
-import { InputStyle } from "@/app/styles/Global/CommonStyles";
+import {
+  InputStyle,
+  InputLoginStyle,
+  InputPasswordStyle,
+} from "@/app/styles/Global/CommonStyles";
 
 // img
 import ShowPwd from "@/app/assets/login/showPassword.png";
@@ -14,12 +18,10 @@ import Kakao from "@/app/assets/login/kakao_login_medium_wide.png";
 
 // libraries
 import axios from "axios";
-import Script from "next/script";
 
 // types
 import { LoginUserData } from "@/app/types/aboutLogin";
 import { db } from "@/app/mocks/db";
-import { DATABASE_INSTANCE } from "@mswjs/data/lib/glossary";
 
 const page = () => {
   const router = useRouter();
@@ -56,33 +58,49 @@ const page = () => {
   const kakaoLogin = () => {};
 
   // login 로직
-  const logIn = () => {
-    const checkUser = db.user
-      .getAll()
-      .filter(
-        (userData) => userData.email === email && userData.password === password
+  const logIn = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ADDRESS}/user/login`,
+        {
+          email,
+          password,
+        }
       );
-    console.log(checkUser);
-    if (checkUser.length > 0) {
-      // 홈페이지 이동
-      router.push("/");
-    } else {
-      console.log("Login Failed!!");
-      setIsFailed(true);
+      const data = response.data;
+      console.log(response);
+      if (data) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ADDRESS}/user/all`
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   useEffect(() => {
     console.log("loginData: ", loginData);
-    const getAllUser = db.user.getAll();
-    console.log("getAllUser: ", getAllUser);
   }, [loginData]);
+
   return (
     <LoginContainer>
       <span className="projectTitle">Talk to me◦</span>
 
       <main className="inputContainer">
-        <InputStyle style={{ marginBottom: "0.5rem" }}>
+        <InputLoginStyle style={{ marginBottom: 0 }}>
           <input
             className="input"
             type="email"
@@ -91,9 +109,9 @@ const page = () => {
             required
             onChange={(e) => inputData("email", e.target.value)}
           />
-        </InputStyle>
+        </InputLoginStyle>
 
-        <InputStyle style={{ marginBottom: "0.5rem" }}>
+        <InputPasswordStyle style={{ marginBottom: "0.5rem" }}>
           <input
             className="input"
             type={changePasswordMode ? "text" : "password"}
@@ -107,7 +125,7 @@ const page = () => {
             alt="비밀번호 보이기"
             onClick={handlePWD}
           />
-        </InputStyle>
+        </InputPasswordStyle>
 
         {/* 로그인 error 시에 */}
         {isFailed && (

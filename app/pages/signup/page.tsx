@@ -30,6 +30,7 @@ import {
   guideMessage,
   messageAnimationState,
 } from "@/app/atom/state";
+import uuid from "react-uuid";
 
 //hooks
 import useGetMessages, {
@@ -58,14 +59,14 @@ const page = () => {
     email: "",
     nickname: "",
     password: "",
-    passwordChecked: "",
+    passwordCheck: "",
   });
-  const { email, nickname, password, passwordChecked } = signupData;
+  const { email, nickname, password, passwordCheck } = signupData;
   // 관심사
   const [interests, setInterests] = useRecoilState<string[]>(userInterests);
 
   // 비밀번호 보이게 하는 상태
-  const showment = password === passwordChecked && password !== "";
+  const showment = password === passwordCheck && password !== "";
 
   // 비밀번호 상태 변경
   const handlePWD = () => {
@@ -118,13 +119,9 @@ const page = () => {
 
   // 누락된 부분 확인 함수
   const checkMissingFields = () => {
-    const missingFields = [
-      email,
-      nickname,
-      password,
-      passwordChecked,
-      interests,
-    ].some((field) => field === "");
+    const missingFields = [email, nickname, password, interests].some(
+      (field) => field === ""
+    );
     setIsMissingFields(missingFields);
   };
 
@@ -135,27 +132,30 @@ const page = () => {
     if (!isMissingFields) {
       // 회원가입 로직
       try {
-        const response = await axios.post("/v1/api/login", {
-          email,
-          nickname,
-          password,
-          passwordChecked,
-          interests,
-        });
-        console.log(response);
-        router.push("/pages/login");
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_ADDRESS}/user/signup`,
+          {
+            email,
+            nickname,
+            password,
+            interests,
+          }
+        );
+        console.log(res);
+
+        if (res.status === 201) {
+          router.push("/pages/login");
+        }
       } catch (e) {
         console.log(e);
       }
     }
   };
+
   useEffect(() => {
     console.log("signupData: ", signupData);
     console.log("interests: ", interests);
-    // console.log("messages: ", messages);
-    const dbuser = db.user.getAll();
-    console.log(dbuser);
-  }, [signupData, interests, messages]);
+  }, [signupData, interests]);
 
   return (
     <SignupContainer showment={showment.toString()}>
@@ -203,23 +203,23 @@ const page = () => {
           <input
             className="input"
             placeholder="비밀번호 확인"
-            name="passwordChecked"
+            name="passwordCheck"
             type={changePasswordMode ? "text" : "password"}
-            onChange={(e) => inputData("passwordChecked", e.target.value)}
+            onChange={(e) => inputData("passwordCheck", e.target.value)}
             onMouseOver={(e) => getMessages(e.currentTarget.name)}
           />
         </InputStyle>
 
         {password !== "" &&
-          passwordChecked !== "" &&
+          passwordCheck !== "" &&
           password.length > 8 &&
-          passwordChecked.length > 8 &&
-          password === passwordChecked && (
+          passwordCheck.length > 8 &&
+          password === passwordCheck && (
             <div className="correctMent">비밀번호가 일치합니다 ✅</div>
           )}
         {password.length > 8 &&
-          passwordChecked.length > 8 &&
-          password !== passwordChecked && (
+          passwordCheck.length > 8 &&
+          password !== passwordCheck && (
             <div className="errorMessage"> 비밀번호가 일치하지 않습니다 ❌</div>
           )}
 
