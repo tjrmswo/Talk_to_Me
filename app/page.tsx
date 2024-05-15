@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 
 // styles
 import { HomeContainer } from "@/app/styles/Home/HomeStyles";
-import CategoryContainer from "./styles/Home/CategoryContainer";
-import SearchResultContainer from "./styles/Home/SearchResultContainer";
+import CategoryContainer from "./components/Home/CategoryContainer";
+import SearchResultContainer from "./components/Home/SearchResultContainer";
 
 // components
 import GlobalHeader from "./components/GlobalHeader";
@@ -55,9 +55,11 @@ const Home = () => {
   const getAllUserData = useQuery({
     queryKey: ["userData"],
     queryFn: async () => {
-      const response = await axios.get("/v1/api/user");
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ADDRESS}/user/all`
+      );
       const data = response.data;
-      console.log(response);
+      console.log(data);
       setUserData(data);
 
       return data;

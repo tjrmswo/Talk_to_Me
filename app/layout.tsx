@@ -21,7 +21,8 @@ export default function RootLayout({
       <body style={{ margin: 0 }} className={inter.className}>
         <ReactQueryProvider>
           <RecoilRootWrapper>
-            <MSWComponent>{children}</MSWComponent>
+            {/* <MSWComponent>{children}</MSWComponent> */}
+            {children}
           </RecoilRootWrapper>
         </ReactQueryProvider>
       </body>

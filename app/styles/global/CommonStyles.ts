@@ -13,12 +13,12 @@ export const InputStyle = styled.div`
   margin-bottom: 1.5rem;
 
   outline: none;
-  &:hover {
+  /* &:hover {
     border-color: ${theme.mainColorDeepRed};
   }
   &:focus {
     border-color: ${theme.mainColorDeepRed};
-  }
+  } */
 
   .input {
     width: 26vw;
@@ -36,6 +36,58 @@ export const CommonButton = styled.button`
     color: white;
     background-color: ${theme.mainColor};
     transition: 0.3s transform;
-    transform: scalex(1.05);
+    transform: scale(1.05);
+  }
+`;
+
+export const InputLoginStyle = styled.div`
+  display: flex;
+  align-items: center;
+  width: 28vw;
+  height: 50px;
+  border: 2px solid #c1c1c1;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: ${theme.mainColorGray};
+  padding-left: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  outline: none;
+  &:hover {
+    border-color: ${theme.mainColorDeepRed};
+  }
+  &:focus {
+    border-color: ${theme.mainColorDeepRed};
+  }
+
+  .input {
+    width: 26vw;
+    border: none;
+    outline: none;
+  }
+`;
+
+export const InputPasswordStyle = styled.div`
+  display: flex;
+  align-items: center;
+  width: 28vw;
+  height: 50px;
+  border: 2px solid #c1c1c1;
+  border-radius: 0 0 0.5rem 0.5rem;
+  color: ${theme.mainColorGray};
+  padding-left: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  outline: none;
+  &:hover {
+    border-color: ${theme.mainColorDeepRed};
+  }
+  &:focus {
+    border-color: ${theme.mainColorDeepRed};
+  }
+
+  .input {
+    width: 26vw;
+    border: none;
+    outline: none;
   }
 `;

@@ -44,13 +44,13 @@ export const LoginContainer = styled.div`
       color: white;
       background-color: ${theme.mainColor};
       transition: 0.3s transform;
-      transform: scalex(1.05);
+      transform: scale(1.05);
     }
   }
   .socialLogin {
     &:hover {
       transition: 0.3s transform;
-      transform: scalex(1.05);
+      transform: scale(1.05);
     }
   }
   .signupButton {
@@ -67,7 +67,7 @@ export const LoginContainer = styled.div`
       color: ${theme.mainColor};
       background-color: white;
       transition: 0.3s transform;
-      transform: scalex(1.05);
+      transform: scale(1.05);
     }
   }
 `;

@@ -2,7 +2,7 @@ export interface SignupUserData {
   email: string;
   nickname: string;
   password: string;
-  passwordChecked: string;
+  passwordCheck: string;
 }
 
 export interface UserInterests {
