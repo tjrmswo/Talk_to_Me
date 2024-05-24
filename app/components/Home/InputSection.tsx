@@ -24,7 +24,6 @@ interface inputSectionType {
 const InputSection: React.FC<inputSectionType> = ({
   userData,
   setUserData,
-  searchData,
   setSearchData,
 }) => {
   // input 검색
@@ -36,6 +35,8 @@ const InputSection: React.FC<inputSectionType> = ({
     const search = userData.filter((data) => data.nickname.includes(user));
     if (search.length > 0) {
       setUserData(search);
+    } else {
+      setUserData(userData);
     }
   };
 

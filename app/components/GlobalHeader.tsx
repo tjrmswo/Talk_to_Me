@@ -19,24 +19,52 @@ import {
 import Serach from "@/app/assets/header/searchIcon.png";
 import Chatting from "@/app/assets/header/chat.png";
 import LogOut from "@/app/assets/header/logout.png";
+import Login from "@/app/assets/header/login.png";
 import Close from "@/app/assets/header/Close_round.png";
+import { useCookies } from "react-cookie";
 
 const GlobalHeader = () => {
+  // cookie
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "id",
+    "accessToken",
+    "refreshToken",
+  ]);
+  // router
   const router = useRouter();
+
+  // message
   const message = useRecoilValue(guideMessage);
   const animations = useRecoilValue(messageAnimationState);
+
+  // open inputSection boolean
   const [inputSection, setInputSection] = useRecoilState(handleInputSection);
 
   const showInput = () => {
     setInputSection(true);
   };
 
+  // hide inputSection
   const hideInput = () => {
     setInputSection(false);
   };
 
+  // return home
   const goHome = () => {
     router.push("/");
+  };
+
+  // log out
+  const logout = () => {
+    removeCookie("id");
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
+    window.location.reload();
+  };
+
+  // log in
+  const login = () => {
+    router.push("/pages/login");
   };
 
   return (
@@ -73,7 +101,17 @@ const GlobalHeader = () => {
             onClick={showInput}
           />
           <Image className="img" src={Chatting} alt="채팅" />
-          <Image className="img" src={LogOut} alt="로그아웃" />
+
+          {cookies.id ? (
+            <Image
+              className="img"
+              src={LogOut}
+              alt="로그아웃"
+              onClick={logout}
+            />
+          ) : (
+            <Image className="img" src={Login} alt="로그인" onClick={login} />
+          )}
         </div>
       )}
       {/* <div className="buttonContainer">
