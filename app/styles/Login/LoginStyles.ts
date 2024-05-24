@@ -47,11 +47,24 @@ export const LoginContainer = styled.div`
       transform: scale(1.05);
     }
   }
+  .socialContainer {
+    &:hover {
+    }
+  }
   .socialLogin {
+    width: 50px;
+    height: 50px;
     &:hover {
       transition: 0.3s transform;
       transform: scale(1.05);
+      border-radius: 30%;
+      background-color: ${theme.mainColorGray};
+      padding: 0.5rem;
     }
+  }
+  .socialName {
+    margin-top: 1rem;
+    font-weight: 600;
   }
   .signupButton {
     width: 27vw;

@@ -32,7 +32,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.2",
     "msw": "^2.3.0",
-    "react-uuid": "^2.0.0",
+    "react-cookie": "^7.1.4",
     "recoil": "^0.7.7",
     "typescript": "^5.4.5"
   },

@@ -48,7 +48,11 @@ const Home = () => {
     password: "",
     passwordChecked: "",
     interests: [],
+    kakao_id: 0,
     profile: "",
+    gender: "",
+    profile_image: "",
+    thumbnail_image: "",
   });
 
   // 전체 유저 데이터 가져오기
@@ -78,8 +82,8 @@ const Home = () => {
 
   useEffect(() => {
     console.log("interests: ", interests);
-    console.log("selectUserData: ", selectUserData);
-  }, [interests, selectUserData]);
+    console.log("searchData: ", searchData);
+  }, [interests, searchData]);
 
   if (getAllUserData.isLoading) return <LoadingPage />;
   if (getAllUserData.isError) return <ErrorPage />;

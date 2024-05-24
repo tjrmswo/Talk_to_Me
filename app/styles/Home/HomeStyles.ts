@@ -76,6 +76,10 @@ export const HomeContainer = styled.div<{ openinputsection: string }>`
     flex-wrap: wrap;
     margin-top: 1rem;
   }
+  .imgs {
+    width: 7vw;
+    border-radius: 1rem;
+  }
   .userSearchResult {
     width: 11vw;
     height: auto;
